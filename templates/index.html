@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="{{url_for('static', filename='css/styles.css') }}">
+    <title>TO DO</title>
+</head>
+<body>
+<h1>ToDo Website</h1>
+
+<section id="todo_input">
+<h2>New todos</h2>
+<form action="{{url_for('add_todo')}}" method="post">
+    <label for="next_todo">Next Todo</label>
+    <input type="text" name="next_todo" id="next_todo">
+    <button type="submit">ADD TODO</button>
+</form>
+</section>
+
+<section id="todos">
+<h2>Todos</h2>
+<ol>
+    {% for todo in todo_list %}
+    <li>
+        {{todo.task}}
+        <div>
+            <form action="{{url_for('mark_done', todo_id=todo.id)}}" method="post">
+                <button type="submit">done</button>
+            </form>
+        </div>
+    </li>
+    {% endfor %}
+</ol>
+</section>
+
+<section id="finished-todos">
+<h2>Finished Todos</h2>
+<ol>
+    {%for todo in todo_list_done%}
+    <li>
+        {{todo.task}}
+        <div>
+            <form action="{{url_for('delete_todo', todo_id=todo.id)}}" method="post">
+                <button type="submit">delete</button>
+            </form>
+        </div>
+    </li>
+    {% endfor %}
+</ol>
+</section>
+
+
+</body>
+</html>
